@@ -1,8 +1,11 @@
 package com.kata;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -159,23 +162,24 @@ public class Yatzy {
 
 	private int calculSumTwoPair() {
 		Map<Integer, Long> groupingByCountMap = groupingByCount();
-		return groupingByCountMap.entrySet().stream().filter(entry -> entry.getValue() >= 2).mapToInt(x -> x.getKey())
-				.sum() * 2;
+		int sumOfDiceNumber = groupingByCountMap.entrySet().stream().filter(entry -> entry.getValue() >= 2)
+				.mapToInt(x -> x.getKey()).sum();
+		return sumOfDiceNumber * 2;
 	}
 
 	private int calculSumFourOfKind() {
 		Map<Integer, Long> groupingByCountMap = groupingByCount();
-		int theDiceOccurance = groupingByCountMap.entrySet().stream().filter(x -> x.getValue() >= 4)
+		int theDiceNumber = groupingByCountMap.entrySet().stream().filter(x -> x.getValue() >= 4)
 				.mapToInt(y -> y.getKey()).findFirst().getAsInt();
 
-		return theDiceOccurance * 4;
+		return theDiceNumber * 4;
 	}
 
 	private int calculSumThreeOfKind() {
 		Map<Integer, Long> groupingByCountMap = groupingByCount();
-		int theDiceOccurance = groupingByCountMap.entrySet().stream().filter(x -> x.getValue() >= 3)
+		int theDiceNumber = groupingByCountMap.entrySet().stream().filter(x -> x.getValue() >= 3)
 				.mapToInt(x -> x.getKey()).findFirst().getAsInt();
-		return theDiceOccurance * 3;
+		return theDiceNumber * 3;
 	}
 
 	private boolean ifPair() {
@@ -209,13 +213,13 @@ public class Yatzy {
 	}
 
 	private int smallStraight() {
-		if (ifDistinct())
+		if (ifMatchSmallStraightRul())
 			return calculSum();
 		return 0;
 	}
 
 	private int largeStraight() {
-		if (ifDistinct())
+		if (ifMatchLargeStraightRul())
 			return calculSum();
 		return 0;
 	}
@@ -226,8 +230,24 @@ public class Yatzy {
 		return 0;
 	}
 
-	private boolean ifDistinct() {
-		return Arrays.stream(this.dice).distinct().count() == this.dice.length;
+	private boolean ifMatchSmallStraightRul() {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+		return ifAllDistinct() 
+				&& Arrays.stream(this.dice).distinct().allMatch(x -> {
+			return list.contains(x);
+		});
+	}
+
+	private boolean ifMatchLargeStraightRul() {
+		List<Integer> list = Arrays.asList(6, 2, 3, 4, 5);
+		return ifAllDistinct()
+				&& Arrays.stream(this.dice).distinct().allMatch(x -> {
+			return list.contains(x);
+		});
+	}
+
+	private boolean ifAllDistinct() {
+		return Arrays.stream(this.dice).distinct().count() == 5;
 	}
 
 	private int calculSum() {
