@@ -34,18 +34,6 @@ public class Yatzy {
 		return new Yatzy(d1, d2, d3, d4, d5).threes();
 
 	}
-	
-	public int fours() {
-		return calculSumByDiceNumber(4);
-	}
-	
-	public int fives() {
-		return calculSumByDiceNumber(5);
-	}
-	
-	public int sixes() {
-		return calculSumByDiceNumber(6);
-	}
 
 	protected int[] dice;
 
@@ -69,6 +57,17 @@ public class Yatzy {
 		return 0;
 	}
 
+	public int fours() {
+		return calculSumByDiceNumber(4);
+	}
+
+	public int fives() {
+		return calculSumByDiceNumber(5);
+	}
+
+	public int sixes() {
+		return calculSumByDiceNumber(6);
+	}
 
 	public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
 
@@ -109,15 +108,15 @@ public class Yatzy {
 	private int ones() {
 		return calculSumByDiceNumber(1);
 	}
-	
+
 	private int twos() {
 		return calculSumByDiceNumber(2);
 	}
-	
+
 	private int threes() {
 		return calculSumByDiceNumber(3);
 	}
-	
+
 	private int score_pair() {
 
 		if (ifPair()) {
@@ -233,16 +232,14 @@ public class Yatzy {
 
 	private boolean ifMatchSmallStraightRul() {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-		return ifAllDistinct() 
-				&& Arrays.stream(this.dice).distinct().allMatch(x -> {
+		return ifAllDistinct() && Arrays.stream(this.dice).distinct().allMatch(x -> {
 			return list.contains(x);
 		});
 	}
 
 	private boolean ifMatchLargeStraightRul() {
 		List<Integer> list = Arrays.asList(6, 2, 3, 4, 5);
-		return ifAllDistinct()
-				&& Arrays.stream(this.dice).distinct().allMatch(x -> {
+		return ifAllDistinct() && Arrays.stream(this.dice).distinct().allMatch(x -> {
 			return list.contains(x);
 		});
 	}
