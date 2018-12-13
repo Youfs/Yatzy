@@ -34,6 +34,18 @@ public class Yatzy {
 		return new Yatzy(d1, d2, d3, d4, d5).threes();
 
 	}
+	
+	public int fours() {
+		return calculSumByDiceNumber(4);
+	}
+	
+	public int fives() {
+		return calculSumByDiceNumber(5);
+	}
+	
+	public int sixes() {
+		return calculSumByDiceNumber(6);
+	}
 
 	protected int[] dice;
 
@@ -57,29 +69,6 @@ public class Yatzy {
 		return 0;
 	}
 
-	public int ones() {
-		return calculSumByDiceNumber(1);
-	}
-
-	public int twos() {
-		return calculSumByDiceNumber(2);
-	}
-
-	public int threes() {
-		return calculSumByDiceNumber(3);
-	}
-
-	public int fours() {
-		return calculSumByDiceNumber(4);
-	}
-
-	public int fives() {
-		return calculSumByDiceNumber(5);
-	}
-
-	public int sixes() {
-		return calculSumByDiceNumber(6);
-	}
 
 	public static int score_pair(int d1, int d2, int d3, int d4, int d5) {
 
@@ -117,7 +106,19 @@ public class Yatzy {
 		return new Yatzy(d1, d2, d3, d4, d5).fullHouse();
 	}
 
-	public int score_pair() {
+	private int ones() {
+		return calculSumByDiceNumber(1);
+	}
+	
+	private int twos() {
+		return calculSumByDiceNumber(2);
+	}
+	
+	private int threes() {
+		return calculSumByDiceNumber(3);
+	}
+	
+	private int score_pair() {
 
 		if (ifPair()) {
 			return calculSumPair();
@@ -126,7 +127,7 @@ public class Yatzy {
 
 	}
 
-	public int two_pair() {
+	private int two_pair() {
 
 		if (ifTwoPair()) {
 			return calculSumTwoPair();
@@ -135,7 +136,7 @@ public class Yatzy {
 
 	}
 
-	public int three_of_a_kind() {
+	private int three_of_a_kind() {
 
 		if (ifThreeOfKind()) {
 			return calculSumThreeOfKind();
@@ -144,7 +145,7 @@ public class Yatzy {
 
 	}
 
-	public int four_of_a_kind() {
+	private int four_of_a_kind() {
 
 		if (ifFourOfKind()) {
 			return calculSumFourOfKind();
