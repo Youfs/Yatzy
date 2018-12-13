@@ -195,12 +195,12 @@ public class Yatzy {
 
 	private boolean ifStrictThreeOfKind() {
 		Map<Integer, Long> groupingByCountMap = groupingByCount();
-		return groupingByCountMap.values().stream().filter(x -> x == 3).count() == 1;
+		return groupingByCountMap.values().stream().anyMatch(x -> x == 3);
 	}
 
 	private boolean ifStrictPair() {
 		Map<Integer, Long> groupingByCountMap = groupingByCount();
-		return groupingByCountMap.values().stream().filter(x -> x == 2).count() == 1;
+		return groupingByCountMap.values().stream().anyMatch(x -> x == 2);
 	}
 
 	private boolean ifFourOfKind() {
